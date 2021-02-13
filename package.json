@@ -1,0 +1,39 @@
+{
+  "name": "game-search",
+  "version": "1.0.0",
+  "description": "Application for searching for new games on specific gaming platforms",
+  "main": "./server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-build": "webpack --watch",
+    "build": "webpack",
+    "start": "nodemon ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayley-jones-cyber/game-search.git"
+  },
+  "keywords": [],
+  "author": "Hayley Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hayley-jones-cyber/game-search/issues"
+  },
+  "homepage": "https://github.com/hayley-jones-cyber/game-search#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.20.0",
+    "eslint-plugin-react": "^7.22.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.5.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
