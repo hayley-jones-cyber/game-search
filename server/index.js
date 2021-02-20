@@ -30,7 +30,7 @@ const port = 3001;
 
 // to get the initial game list
 app.get('/api/games', (req, res) => {
-  axios.post('https://api.igdb.com/v4/games', 'fields *; limit 100;', {
+  axios.post('https://api.igdb.com/v4/games', 'fields *; limit 500;', {
     method: 'post',
     headers: {
       'Client-ID': CLIENT_ID,
@@ -38,6 +38,60 @@ app.get('/api/games', (req, res) => {
     }
   })
     .then((response) => {
+      res.send(response.data);
+    })
+    .catch((error) => {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        res.status(error.response.status);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+    })
+});
+
+// to get the filtered list of games
+app.post('/api/filteredgames', (req, res) => {
+  const platforms = Object.keys(req.body);
+  axios.post('https://api.igdb.com/v4/games', `fields *; where platforms = {${platforms}} limit 100;`, {
+    method: 'post',
+    headers: {
+      'Client-ID': CLIENT_ID,
+      Authorization: `Bearer ${token.access_token}`
+    }
+  })
+    .then((response) => {
+      // const key = Object.keys(req.body);
+      // const idList;
+      // if (key.length > 1) {
+      //   idList = key[0].split(',');
+      // } else {
+      //   idList = key[0];
+      //   console.log('idList', idList);
+      // }
+      // let gameList = response.data.map((game) => {
+      //   if (!game.platforms || !game.name) {
+      //     return;
+      //   }
+      //   for (let i = 0; i < idList.length; i++) {
+      //     for (let j = 0; j < game.platforms.length; j++) {
+      //       if (idList[i] === game.platforms[j]) {
+      //         return game;
+      //       }
+      //     }
+      //   }
+      // })
       res.send(response.data);
     })
     .catch((error) => {

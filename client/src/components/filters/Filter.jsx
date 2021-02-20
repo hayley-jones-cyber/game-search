@@ -1,12 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Option from './Option.jsx';
 
 const Filter = (props) => {
-  const { list } = props;
+  const {
+    list,
+    addFilter,
+    removeFilter
+  } = props;
   let filterButtons = list.map((option, i) => {
     return (
       <div key={i}>
-        <button>{option.name}</button>
+        <Option
+          option={option}
+          addFilter={addFilter}
+          removeFilter={removeFilter}
+        />
       </div>
     )
   })
@@ -16,7 +25,9 @@ const Filter = (props) => {
 }
 
 Filter.propTypes = {
-  list: PropTypes.instanceOf(Array).isRequired
+  list: PropTypes.instanceOf(Array).isRequired,
+  addFilter: PropTypes.func.isRequired,
+  removeFilter: PropTypes.func.isRequired
 }
 
 export default Filter;
